@@ -1,0 +1,9 @@
+<h2>Chaînes</h2>
+
+<div class="channel-item" *ngFor="let channel of channels | async">
+    <h3>
+        <a>{{ channel.IdCh }}</a>
+        <span>{{ channel.Name }}</span>
+        <span>{{ channel.URL }}</span>
+    </h3>
+</div>

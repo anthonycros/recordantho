@@ -1,0 +1,18 @@
+<h2>Enregistrements</h2>
+<div *ngFor="let record of records">
+    <h3>
+        <a [title]="record.chaine + ' détails'"
+        [routerLink]="['/records', record.id]">
+            {{ record.chaine }}
+        </a>
+    </h3>
+
+    <p *ngIf="record.description">
+        Description: {{ record.description }}
+    </p>
+
+    <button (click)="test_alert()">
+        Test Alerte
+    </button>
+
+</div>
