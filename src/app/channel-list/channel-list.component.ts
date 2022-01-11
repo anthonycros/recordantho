@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChannelService } from '../channel.service';
 
-//import { channels } from '../channels';
-
 @Component({
   selector: 'app-channel-list',
   templateUrl: './channel-list.component.html',
@@ -10,14 +8,12 @@ import { ChannelService } from '../channel.service';
 })
 export class ChannelListComponent implements OnInit {
 
-  //channels = channels;
   channels = this.channelService.getChannels();
 
-  test_alert() {
+  test_button() {
     window.alert('Alerte sur la chaîne !');
   }
 
-  
   constructor(private channelService: ChannelService) { }
 
   ngOnInit(): void {

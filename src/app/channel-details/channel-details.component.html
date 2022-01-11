@@ -1,6 +1,8 @@
-<h2>Détails de la chaîne</h2>
-
 <div *ngIf="channel">
-  <h3>{{ channel.name }}</h3>
-  <p>{{ channel.description }}</p>
+  <h3>Détails de la chaîne {{ channel.name }}</h3>
+  <h4> 
+    <p>Id : {{ channel.id }}</p>
+    <p>Nom : {{ channel.name }}</p>
+    <p>URL : {{ channel.url }}</p>
+  </h4>
 </div>

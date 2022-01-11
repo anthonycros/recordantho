@@ -28,8 +28,8 @@ import { RecordDetailsComponent } from './record-details/record-details.componen
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: ChannelListComponent },
-      { path: 'channels/:channelId', component: ChannelDetailsComponent},
-      { path: 'records/:recordId', component: RecordDetailsComponent},
+      { path: 'channels/:channelid', component: ChannelDetailsComponent},
+      { path: 'records/:recordid', component: RecordDetailsComponent},
     ])
   ],
   providers: [],

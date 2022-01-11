@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Record, records } from '../records';
-
+import { Record } from '../records';
+import { RecordService } from '../record.service';
 
 @Component({
   selector: 'app-record-details',
@@ -12,15 +12,15 @@ export class RecordDetailsComponent implements OnInit {
 
   record: Record | undefined;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private recordService: RecordService) { }
 
   ngOnInit(): void {
     // D'abord on récupère l'id de l'enregistrement depuis la route courante
     const routeParams = this.route.snapshot.paramMap;
-    const recordIdFromRoute = Number(routeParams.get('recordId'));
+    const recordIdFromRoute = routeParams.get('recordid');
 
     // Puis on cherche la chaine correspondant à cet id
-    this.record = records.find(record => record.id === recordIdFromRoute);
+    this.recordService.getRecords().then(resultat=> { this.record = resultat.find(record => record.id === recordIdFromRoute) })
 
   }
 

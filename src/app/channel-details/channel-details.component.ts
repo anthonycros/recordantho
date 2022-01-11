@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Channel, channels } from '../channels';
+import { Channel } from '../channels';
+import { ChannelService } from '../channel.service';
 
 @Component({
   selector: 'app-channel-details',
@@ -10,16 +11,17 @@ import { Channel, channels } from '../channels';
 export class ChannelDetailsComponent implements OnInit {
 
   channel: Channel | undefined;
-
-  constructor(private route: ActivatedRoute) { }
+  
+  constructor(private route: ActivatedRoute, private channelService: ChannelService) { }
 
   ngOnInit(): void {
     // D'abord on récupère l'id de la chaine depuis la route courante
     const routeParams = this.route.snapshot.paramMap;
-    const channelIdFromRoute = Number(routeParams.get('channelId'));
+    const channelIdFromRoute = routeParams.get('channelid');
 
     // Puis on cherche la chaine correspondant à cet id
-    this.channel = channels.find(channel => channel.id === channelIdFromRoute);
+    this.channelService.getChannels().then(resultat=> { this.channel = resultat.find(channel => channel.id === channelIdFromRoute) })
+
 
   }
 

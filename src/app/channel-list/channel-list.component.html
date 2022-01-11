@@ -2,8 +2,16 @@
 
 <div class="channel-item" *ngFor="let channel of channels | async">
     <h3>
-        <a>{{ channel.IdCh }}</a>
-        <span>{{ channel.Name }}</span>
-        <span>{{ channel.URL }}</span>
+        <a [title]="'Détails de '+channel.name">
+            {{ channel.name }}
+        </a>
     </h3>
+
+    <p>
+        URL : {{ channel.url }}
+    </p>
+
+    <button (click)="test_button()">
+        Test
+    </button>
 </div>

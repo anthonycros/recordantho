@@ -1,8 +1,14 @@
-<h2>Détails de l'enregistrement</h2>
-
 <div *ngIf="record">
-  <h3>{{ record.chaine }}</h3>
-  <h4>{{ record.debut }}</h4>
-  <h4>{{ record.fin }}</h4>
-  <p>{{ record.description }}</p>
+  <h3>Détails de l'enregistrement {{ record.name }}</h3>
+  <h4> 
+    <p>Id : {{ record.id }}</p>
+    <p>Nom : {{ record.name }}</p>
+    <p>Id de la chaine : {{ record.idch }}</p>
+    <p>Nom de la chaine : {{ record.namech }}</p>
+    <p>URL de la chaine : {{ record.urlch }}</p>
+    <p>Début de l'enregistrement : {{ record.recbegin }}</p>
+    <p>Fin de l'enregistrement : {{ record.recend }}</p>
+    <p>Terminé : {{ record.done }}</p>
+    <p>Archivé : {{ record.archived }}</p>
+  </h4>
 </div>

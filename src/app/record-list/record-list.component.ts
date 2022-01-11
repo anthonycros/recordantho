@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { records } from '../records';
+import { RecordService } from '../record.service';
 
 @Component({
   selector: 'app-record-list',
@@ -9,13 +8,13 @@ import { records } from '../records';
 })
 export class RecordListComponent implements OnInit {
 
-  records = records;
+  records = this.recordService.getRecords();
 
-  test_alert() {
+  test_button() {
     window.alert('Alerte sur les enregistrements !');
   }
 
-  constructor() { }
+  constructor(private recordService: RecordService) { }
 
   ngOnInit(): void {
   }
