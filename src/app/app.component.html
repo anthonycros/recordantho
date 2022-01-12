@@ -1,5 +1,7 @@
-<app-top-bar></app-top-bar>
-
-<div class="container">
-    <router-outlet></router-outlet>
-</div>
+<h1>{{title}}</h1>
+<nav>
+    <a routerLink="/channels">Chaînes</a>
+    -
+    <a routerLink="/records">Enregistrements</a>
+</nav>
+<router-outlet></router-outlet>

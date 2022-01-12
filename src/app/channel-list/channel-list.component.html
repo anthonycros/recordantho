@@ -1,6 +1,16 @@
 <h2>Chaînes</h2>
 
-<div class="channel-item" *ngFor="let channel of channels | async">
+<ul class="channel-list">
+    <li *ngFor="let channel of channels | async">
+        <a routerLink="/channel/{{ channel.id }}">
+            <span class="badge">{{ channel.id }}</span> {{ channel.name }}
+        </a>
+        <!-- <button class="delete" title="delete hero"
+        (click)="delete(hero)">x</button> -->
+    </li>
+</ul>
+
+<!-- <div class="channel-item" *ngFor="let channel of channels | async">
     <h3>
         <a [title]="'Détails de '+channel.name">
             {{ channel.name }}
@@ -14,4 +24,4 @@
     <button (click)="test_button()">
         Test
     </button>
-</div>
+</div> -->
