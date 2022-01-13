@@ -14,6 +14,8 @@ export class ChannelDetailsComponent implements OnInit {
 
   @Input() channel?: Channel;
   // channel: Channel | undefined;
+
+  submitted = false;
   
   constructor(
     private route: ActivatedRoute,
@@ -46,4 +48,6 @@ export class ChannelDetailsComponent implements OnInit {
       this.channelService.updateChannel(this.channel)
     }
   }
+
+  onSubmit() { this.submitted = true; }
 }

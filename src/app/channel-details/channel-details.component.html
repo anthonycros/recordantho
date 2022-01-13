@@ -1,22 +1,46 @@
-<div *ngIf="channel">
-  <h2>Détails de la chaîne {{ channel.name }}</h2>
-  
-  <div>
-    <label for="channel-id">Id de la chaîne : </label>
-    <input id="channel-id" [(ngModel)]="channel.id" placeholder="id">
-  </div>
-  
-  <div>
-    <label for="channel-name">Nom de la chaîne : </label>
-    <input id="channel-name" [(ngModel)]="channel.name" placeholder="name">
-  </div>
+<div class="container">
+  <div *ngIf="channel" [hidden]="submitted">
+    <h2>Détails de la chaîne {{ channel.name }}</h2>
+    <form (ngSubmit)="onSubmit()" #channelForm="ngForm">
+    <div class="form-group">
+      <label for="id">Id de la chaîne : </label>
+      <input type="text" class="form-control "id="id"
+            required
+            [(ngModel)]="channel.id" name="id"
+            #id="ngModel">
+      <div [hidden]="id.valid || id.pristine"
+          class="alert alert-danger">>
+        L'id est obligatoire
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="name">Nom de la chaîne : </label>
+      <input type="text" class="form-control" id="name"
+            required
+            [(ngModel)]="channel.name" name="name"
+            #name="ngModel">
+      <div [hidden]="name.valid || name.pristine"
+            class="alert alert-danger">>
+          Le nom est obligatoire
+      </div>      
+    </div>
 
-  <div>
-    <label for="channel-url">URL de la chaîne : </label>
-    <input id="channel-id" [(ngModel)]="channel.url" placeholder="url">
+    <div class="form-group">
+      <label for="url">URL de la chaîne : </label>
+      <input type="text" class="form-control" id="url"
+            required
+            [(ngModel)]="channel.url" name="url"
+            #url="ngModel">
+      <div [hidden]="url.valid || url.pristine"
+            class="alert alert-danger">>
+          L'URL est obligatoire
+      </div>      
+    </div>
+
+    <button type="button" class="btn btn-default" (click)="goBack()">Retour</button>
+    <button type="submit" class="btn btn-success" [disabled]="!channelForm.form.valid">Enregistrer</button>
+    <button type="button" class="btn btn-default" (click)="channelForm.reset()">Réinitialiser</button>
+    </form>
   </div>
-
-  <button (click)="goBack()">Retour</button>
-  <button (click)="save()">Enregistrer</button>
-
 </div>
