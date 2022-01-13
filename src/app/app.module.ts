@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
     // RouterModule.forRoot([
     //   { path: '', component: ChannelListComponent },

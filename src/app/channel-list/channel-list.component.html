@@ -1,12 +1,12 @@
-<h2>Chaînes</h2>
+<h2>Liste des Chaînes</h2>
 
 <ul class="channel-list">
     <li *ngFor="let channel of channels | async">
-        <a routerLink="/channel/{{ channel.id }}">
+        <a routerLink="/channel/{{channel.id}}">
             <span class="badge">{{ channel.id }}</span> {{ channel.name }}
         </a>
-        <!-- <button class="delete" title="delete hero"
-        (click)="delete(hero)">x</button> -->
+        <button class="delete" title="Supprimer la chaîne"
+        (click)="delete(channel)">x</button>
     </li>
 </ul>
 

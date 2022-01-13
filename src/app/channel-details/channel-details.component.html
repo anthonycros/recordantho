@@ -1,8 +1,22 @@
 <div *ngIf="channel">
-  <h3>Détails de la chaîne {{ channel.name }}</h3>
-  <h4> 
-    <p>Id : {{ channel.id }}</p>
-    <p>Nom : {{ channel.name }}</p>
-    <p>URL : {{ channel.url }}</p>
-  </h4>
+  <h2>Détails de la chaîne {{ channel.name }}</h2>
+  
+  <div>
+    <label for="channel-id">Id de la chaîne : </label>
+    <input id="channel-id" [(ngModel)]="channel.id" placeholder="id">
+  </div>
+  
+  <div>
+    <label for="channel-name">Nom de la chaîne : </label>
+    <input id="channel-name" [(ngModel)]="channel.name" placeholder="name">
+  </div>
+
+  <div>
+    <label for="channel-url">URL de la chaîne : </label>
+    <input id="channel-id" [(ngModel)]="channel.url" placeholder="url">
+  </div>
+
+  <button (click)="goBack()">Retour</button>
+  <button (click)="save()">Enregistrer</button>
+
 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Channel } from './channels';
+import { Channel } from './channel';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +14,10 @@ export class ChannelService {
     { 
       this.http.get<Array<Channel>>('/assets/channels.json').subscribe(resultat=>{ resolve(resultat) });
      });
+
+  }
+
+  updateChannel(channel: Channel) {
+    window.alert(`Méthode updateChannel de channel service ${channel.name}`);  
   }
 }

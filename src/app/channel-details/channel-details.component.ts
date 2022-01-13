@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Channel } from '../channel';
+
 import { ActivatedRoute } from '@angular/router';
-import { Channel } from '../channels';
+import { Location } from '@angular/common';
 import { ChannelService } from '../channel.service';
 
 @Component({
@@ -10,19 +12,38 @@ import { ChannelService } from '../channel.service';
 })
 export class ChannelDetailsComponent implements OnInit {
 
-  channel: Channel | undefined;
+  @Input() channel?: Channel;
+  // channel: Channel | undefined;
   
-  constructor(private route: ActivatedRoute, private channelService: ChannelService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private channelService: ChannelService,
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
     // D'abord on récupère l'id de la chaine depuis la route courante
     const routeParams = this.route.snapshot.paramMap;
-    const channelIdFromRoute = routeParams.get('channelid');
+    const channelIdFromRoute = routeParams.get('id');
 
     // Puis on cherche la chaine correspondant à cet id
-    this.channelService.getChannels().then(resultat=> { this.channel = resultat.find(channel => channel.id === channelIdFromRoute) })
-
-
+    this.channelService.getChannels().then(resultat=> 
+      {
+        this.channel = resultat.find(channel => channel.id === channelIdFromRoute) ;
+      })
   }
 
+  goBack(): void {
+    this.location.back();
+  }
+
+  // save(): void {
+  //   window.alert('Méthode Save à coder');
+  // }
+
+  save() {
+    if (this.channel) {
+      this.channelService.updateChannel(this.channel)
+    }
+  }
 }

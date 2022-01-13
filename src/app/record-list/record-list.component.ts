@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Record } from '../record';
 import { RecordService } from '../record.service';
 
 @Component({
@@ -10,13 +11,13 @@ export class RecordListComponent implements OnInit {
 
   records = this.recordService.getRecords();
 
-  test_button() {
-    window.alert('Alerte sur les enregistrements !');
-  }
-
   constructor(private recordService: RecordService) { }
 
   ngOnInit(): void {
+  }
+
+  delete(record: Record) {
+    window.alert(`Appeler la fonction delete sur l'enregistrement dont l'id est : ${record.id}`);  
   }
 
 }
