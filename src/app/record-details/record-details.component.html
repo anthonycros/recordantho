@@ -1,14 +1,89 @@
-<div *ngIf="record">
-  <h3>Détails de l'enregistrement {{ record.name }}</h3>
-  <h4> 
-    <p>Id : {{ record.id }}</p>
-    <p>Nom : {{ record.name }}</p>
-    <p>Id de la chaine : {{ record.idch }}</p>
-    <p>Nom de la chaine : {{ record.namech }}</p>
-    <p>URL de la chaine : {{ record.urlch }}</p>
-    <p>Début de l'enregistrement : {{ record.recbegin }}</p>
-    <p>Fin de l'enregistrement : {{ record.recend }}</p>
-    <p>Terminé : {{ record.done }}</p>
-    <p>Archivé : {{ record.archived }}</p>
-  </h4>
+<div class="container">
+  <div *ngIf="record" [hidden]="submitted">
+    <h3>Détails de l'enregistrement {{ record.name }}</h3>
+    <form (ngSubmit)="onSubmit()" #recordForm="ngForm">
+    
+    <div class="form-group">
+      <label for="id">Id de l'enregistrement : </label>
+      <input type="text" class="form-control "id="id"
+            required
+            [(ngModel)]="record.id" name="id"
+            #id="ngModel">
+      <div [hidden]="id.valid || id.pristine"
+            class="alert alert-danger">>
+          L'id est obligatoire
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Nom de l'enregistrement : </label>
+      <input type="text" class="form-control "id="name"
+            required
+            [(ngModel)]="record.name" name="name"
+            #name="ngModel">
+      <div [hidden]="name.valid || name.pristine"
+            class="alert alert-danger">>
+          Le nom est obligatoire
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="namech">Nom de la chaîne : </label>
+      <input type="text" class="form-control "id="namech"
+            required
+            [(ngModel)]="record.namech" name="namech"
+            #namech="ngModel">
+      <div [hidden]="namech.valid || namech.pristine"
+            class="alert alert-danger">>
+          Le nom de la chaîne est obligatoire
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="urlch">URL de la chaîne : {{ record.urlch }}</label>
+    </div>
+
+    <div class="form-group">
+      <label for="recbegin">Début de l'enregistrement : </label>
+      <input type="text" class="form-control "id="recbegin"
+            required
+            [(ngModel)]="record.recbegin" name="recbegin"
+            #recbegin="ngModel">
+      <div [hidden]="recbegin.valid || recbegin.pristine"
+            class="alert alert-danger">>
+          Le début de l'enregistrement est obligatoire
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="recend">Fin de l'enregistrement : </label>
+      <input type="text" class="form-control "id="recend"
+            required
+            [(ngModel)]="record.recend" name="recend"
+            #recend="ngModel">
+      <div [hidden]="recend.valid || recend.pristine"
+            class="alert alert-danger">>
+          La fin de l'enregistrement est obligatoire
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="done">Terminé ? </label>
+      <input type="boolean" class="form-control "id="done"
+            [(ngModel)]="record.done" name="done"
+            #done="ngModel">
+    </div>
+
+    <div class="form-group">
+      <label for="archived">Archivé ? </label>
+      <input type="boolean" class="form-control "id="archived"
+            [(ngModel)]="record.archived" name="archived"
+            #archived="ngModel">
+    </div>
+
+    <button type="button" class="btn btn-default" (click)="goBack()">Retour</button>
+    <button type="submit" class="btn btn-success" [disabled]="!recordForm.form.valid">Enregistrer</button>
+    <button type="button" class="btn btn-default" (click)="recordForm.reset()">Réinitialiser</button>
+  </form>
+  </div>
 </div>
