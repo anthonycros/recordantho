@@ -14,10 +14,21 @@ export class ChannelListComponent implements OnInit {
   constructor(private channelService: ChannelService) { }
 
   ngOnInit(): void {
+    
   }
 
   delete(channel: Channel) {
     window.alert(`Appeler la fonction delete sur la chaîne dont l'id est : ${channel.id}`);
+  }
+
+  test_api () {
+    //console.log(this.datarecup);
+    //window.alert(this.datarecup);
+    let datarecup = this.channelService.getChannelsApi(); 
+    datarecup[0].forEach(element => {
+        console.log(element);
+      
+    });
   }
   
   // delete(channel: Channel): void {

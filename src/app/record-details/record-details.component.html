@@ -29,17 +29,22 @@
 
     <div class="form-group">
       <label for="namech">Nom de la chaîne : </label>
-      <input type="text" class="form-control "id="namech"
+      <select class="form-control"
             required
-            [(ngModel)]="record.namech" name="namech"
+            [(ngModel)]="targetChannelid" name="namech"
+            (change)="onChangeChannel()"
             #namech="ngModel">
+        <option *ngFor="let channel of channels" [ngValue]="channel.id"> 
+          {{ channel.name }} 
+        </option>
+      </select>  
       <div [hidden]="namech.valid || namech.pristine"
             class="alert alert-danger">>
           Le nom de la chaîne est obligatoire
       </div>
     </div>
 
-    <div class="form-group">
+    <div *ngIf="record" class="form-group">
       <label for="urlch">URL de la chaîne : {{ record.urlch }}</label>
     </div>
 
@@ -69,14 +74,14 @@
 
     <div class="form-group">
       <label for="done">Terminé ? </label>
-      <input type="boolean" class="form-control "id="done"
+      <input type="checkbox" class="form-control "id="done"
             [(ngModel)]="record.done" name="done"
             #done="ngModel">
     </div>
 
     <div class="form-group">
       <label for="archived">Archivé ? </label>
-      <input type="boolean" class="form-control "id="archived"
+      <input type="checkbox" class="form-control "id="archived"
             [(ngModel)]="record.archived" name="archived"
             #archived="ngModel">
     </div>

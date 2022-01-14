@@ -9,7 +9,6 @@ import { RecordListComponent } from './record-list/record-list.component';
 import { ChannelDetailsComponent } from './channel-details/channel-details.component';
 import { RecordDetailsComponent } from './record-details/record-details.component';
 
-//import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -27,11 +26,6 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    // RouterModule.forRoot([
-    //   { path: '', component: ChannelListComponent },
-    //   { path: 'channels/:channelid', component: ChannelDetailsComponent},
-    //   { path: 'records/:recordid', component: RecordDetailsComponent},
-    // ])
   ],
   providers: [],
   bootstrap: [AppComponent]
