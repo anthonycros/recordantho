@@ -9,7 +9,7 @@ import { ChannelService } from '../channel.service';
 })
 export class ChannelListComponent implements OnInit {
 
-  channels = this.channelService.getChannels();
+  channels = this.channelService.getChannelsApi();
   channelstemp: Channel[];
 
   constructor(private channelService: ChannelService) { }
