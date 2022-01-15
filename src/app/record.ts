@@ -1,7 +1,7 @@
 export interface Record {
-    id: string;
+    id: number;
     name: string;
-    idch: string;
+    idch: number;
     namech: string;
     urlch: string;
     recbegin: string;

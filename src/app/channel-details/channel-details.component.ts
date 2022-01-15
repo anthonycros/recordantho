@@ -29,9 +29,9 @@ export class ChannelDetailsComponent implements OnInit {
     const channelIdFromRoute = routeParams.get('id');
 
     // Puis on cherche la chaine correspondant à cet id
-    this.channelService.getChannelsApi().then(resultat=> 
+    this.channelService.getChannels().then(resultat=> 
       {
-        this.channel = resultat.find(channel => channel.id === channelIdFromRoute) ;
+        this.channel = resultat.find(channel => channel.id === Number(channelIdFromRoute)) ;
       })
   }
 
@@ -43,11 +43,16 @@ export class ChannelDetailsComponent implements OnInit {
   //   window.alert('Méthode Save à coder');
   // }
 
-  save() {
+  save(): void {
     if (this.channel) {
-      this.channelService.updateChannel(this.channel)
+      this.channelService.updateChannel(this.channel).subscribe(()=> this.goBack())
     }
   }
 
-  onSubmit() { this.submitted = true; }
+  onSubmit() {
+     this.submitted = true;
+     if (this.channel) {
+      this.channelService.updateChannel(this.channel).subscribe(() => this.goBack())
+    } 
+  }
 }

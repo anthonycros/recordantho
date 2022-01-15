@@ -9,7 +9,7 @@ import { Channel } from './channel';
 })
 export class ChannelService {
 
-  private channelUrlList = 'http://recordantho.mysites.fr:3000/channel/list';  // URL to web api
+  private channelUrl = 'http://recordantho.mysites.fr:3000/channel';  // URL to web api
 
   constructor(private http: HttpClient) { }
   httpOptions = {
@@ -33,16 +33,24 @@ export class ChannelService {
   getChannelsApi():Promise <Array<Channel>> {
     return new Promise((resolve, reject)=>
     {
-      this.http.get<Array<Channel>>(this.channelUrlList).subscribe(resultat=>{ resolve(resultat) });
+      this.http.get<Array<Channel>>(`${this.channelUrl}/list`).subscribe(resultat=>{ resolve(resultat) });
     });    
   }
 
-
-
-  updateChannel(channel: Channel) {
-    window.alert(`Méthode updateChannel de channel service ${channel.name}`);  
+  updateChannel(channel: Channel): Observable<any> {
+    return this.http.put(`${this.channelUrl}`, channel, this.httpOptions)  
   }
 
+  // genId method to ensure that a channel always has an id.
+  // If the channel array is empty,
+  // the method below returns the initial number (1).
+  // if the channel array is not empty, the method below returns the highest
+  // channel id + 1.
+  genChannelId(channels: Channel[]): number {
+    return channels.length > 0 ? Math.max(...channels.map(channel => channel.id)) + 1 : 1;
+  }
+
+  
   /**
    * Handle Http operation that failed.
    * Let the app continue.

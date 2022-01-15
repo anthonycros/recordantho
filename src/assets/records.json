@@ -1,8 +1,8 @@
 [
     {
-    "id": "ENR01",
+    "id": 1,
     "name": "Test Enreg",
-    "idch": "AP09SD",
+    "idch": 2,
     "namech": "Amazon Prime 9 SD",
     "urlch": "http://pro.viponetv.com:25443/anthony827/TI9AA7HRT5/124559",
     "recbegin": "2022-01-01 9:32 PM GMT+1:00",
@@ -11,9 +11,9 @@
     "archived": false
   },
   {
-    "id": "ENR02",
+    "id": 2,
     "name": "Test Enreg2",
-    "idch": "AP06SD",
+    "idch": 1,
     "namech": "Amazon Prime 6 SD",
     "urlch": "http://pro.viponetv.com:25443/anthony827/TI9AA7HRT5/124520",
     "recbegin": "2021-12-21 3:02 PM GMT+1:00",

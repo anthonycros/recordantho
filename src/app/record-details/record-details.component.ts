@@ -21,7 +21,7 @@ export class RecordDetailsComponent implements OnInit {
   
 
   submitted = false;
-  targetChannelid: string;
+  targetChannelid: number;
 
   constructor(
     private route: ActivatedRoute, 
@@ -38,7 +38,7 @@ export class RecordDetailsComponent implements OnInit {
     // Puis on cherche la chaine correspondant à cet id
     this.recordService.getRecords().then(resultat=> 
       { 
-        this.record = resultat.find(record => record.id === recordIdFromRoute) 
+        this.record = resultat.find(record => record.id === Number(recordIdFromRoute)) 
         this.targetChannelid = this.record.idch
       })
 

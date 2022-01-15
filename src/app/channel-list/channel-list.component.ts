@@ -9,7 +9,8 @@ import { ChannelService } from '../channel.service';
 })
 export class ChannelListComponent implements OnInit {
 
-  channels = this.channelService.getChannelsApi();
+  channels = this.channelService.getChannels();
+  channelstemp: Channel[];
 
   constructor(private channelService: ChannelService) { }
 
@@ -21,13 +22,13 @@ export class ChannelListComponent implements OnInit {
     window.alert(`Appeler la fonction delete sur la chaîne dont l'id est : ${channel.id}`);
   }
 
-  test_api () {
-    //console.log(this.datarecup);
-    //window.alert(this.datarecup);
-    //let datarecup = this.channelService.getChannels(); 
+  test_antho () {
     console.log('bonjour');
-    console.log(this.channels[0].id);
-      
+    this.channelService.getChannelsApi().then(resultat=> {
+      this.channelstemp = resultat
+    })
+    let nb = this.channelService.genChannelId(this.channelstemp)
+    window.alert(nb) 
   };
   
   
