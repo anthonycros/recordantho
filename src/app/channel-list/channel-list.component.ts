@@ -9,7 +9,7 @@ import { ChannelService } from '../channel.service';
 })
 export class ChannelListComponent implements OnInit {
 
-  channels = this.channelService.getChannels();
+  channels = this.channelService.getChannelsApi();
 
   constructor(private channelService: ChannelService) { }
 
@@ -24,12 +24,12 @@ export class ChannelListComponent implements OnInit {
   test_api () {
     //console.log(this.datarecup);
     //window.alert(this.datarecup);
-    let datarecup = this.channelService.getChannelsApi(); 
-    datarecup[0].forEach(element => {
-        console.log(element);
+    //let datarecup = this.channelService.getChannels(); 
+    console.log('bonjour');
+    console.log(this.channels[0].id);
       
-    });
-  }
+  };
+  
   
   // delete(channel: Channel): void {
   //   this.channel = this.channels.filter(h => h !== channel);

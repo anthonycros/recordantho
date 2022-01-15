@@ -12,6 +12,10 @@ export class ChannelService {
   private channelUrlList = 'http://recordantho.mysites.fr:3000/channel/list';  // URL to web api
 
   constructor(private http: HttpClient) { }
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
 
   getChannels():Promise <Array<Channel>> {
     return new Promise((resolve, reject)=>
@@ -21,13 +25,19 @@ export class ChannelService {
 
   }
 
-  getChannelsApi(): Observable<Channel[]> {
-    return this.http.get<Channel[]>(this.channelUrlList)
-    .pipe(
-      catchError(this.handleError<Channel[]>('getChannelsApi', []))
-    );
-    
+  // getChannelsApi(): Observable<Channel[]> {
+  //   return this.http.get<Channel[]>(this.channelUrlList)
+        
+  // }
+
+  getChannelsApi():Promise <Array<Channel>> {
+    return new Promise((resolve, reject)=>
+    {
+      this.http.get<Array<Channel>>(this.channelUrlList).subscribe(resultat=>{ resolve(resultat) });
+    });    
   }
+
+
 
   updateChannel(channel: Channel) {
     window.alert(`Méthode updateChannel de channel service ${channel.name}`);  
