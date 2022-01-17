@@ -9,7 +9,7 @@ import { Channel } from './channel';
 })
 export class ChannelService {
 
-  private channelUrl = 'http://recordantho.mysites.fr:3000/channel';  // URL to web api
+  private channelUrl = 'http://192.168.0.48:3000/channel';  // URL to web api
 
   constructor(private http: HttpClient) { }
   httpOptions = {
