@@ -29,7 +29,7 @@ export class ChannelDetailsComponent implements OnInit {
     const channelIdFromRoute = routeParams.get('id');
 
     // Puis on cherche la chaine correspondant à cet id
-    this.channelService.getChannels().then(resultat=> 
+    this.channelService.getChannelsApi().then(resultat=> 
       {
         this.channel = resultat.find(channel => channel.id === Number(channelIdFromRoute)) ;
       })

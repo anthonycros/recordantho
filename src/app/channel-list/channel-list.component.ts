@@ -9,7 +9,7 @@ import { ChannelService } from '../channel.service';
 })
 export class ChannelListComponent implements OnInit {
 
-  channels = this.channelService.getChannels();
+  channels = this.channelService.getChannelsApi();
   channelstemp: Channel[];
   channelstempApi: Channel[];
 
@@ -33,13 +33,15 @@ export class ChannelListComponent implements OnInit {
     window.alert(`antho en direct dit : ${nb}`) 
   };
   test_anthoApi () {
-    console.log('bonjour');
+    console.log('On entre dans test_anthoapi');
     this.channelService.getChannelsApi().then(resultatApi=> {
       this.channelstempApi = resultatApi
+    console.log(`channelstempApi[0].name vaut : ${this.channelstempApi[0].name}`);
+    console.log(`channelstempApi.lenght vaut : ${this.channelstempApi.length}`);
     })
-    let nb = this.channelService.genChannelId(this.channelstemp)+10
-    console.log(`antho via API dit : ${nb}`)
-    window.alert(`antho via API dit : ${nb}`) 
+    // let nb = this.channelService.genChannelId(this.channelstempApi)+10
+    // console.log(`antho via API dit : ${nb}`)
+    // window.alert(`antho via API dit : ${nb}`) 
   };
   
   
