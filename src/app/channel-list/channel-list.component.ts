@@ -23,7 +23,7 @@ export class ChannelListComponent implements OnInit {
     window.alert(`Appeler la fonction delete sur la chaîne dont l'id est : ${channel.id}`);
   }
 
-  test_antho () {
+  newchannel () {
     console.log('bonjour');
     this.channelService.getChannels().then(resultat=> {
       this.channelstemp = resultat
@@ -33,15 +33,20 @@ export class ChannelListComponent implements OnInit {
     window.alert(`antho en direct dit : ${nb}`) 
   };
   test_anthoApi () {
+    let localChannels: Channel[];
+    let localNb: Number;
     console.log('On entre dans test_anthoapi');
-    this.channelService.getChannelsApi().then(resultatApi=> {
-      this.channelstempApi = resultatApi
-    console.log(`channelstempApi[0].name vaut : ${this.channelstempApi[0].name}`);
-    console.log(`channelstempApi.lenght vaut : ${this.channelstempApi.length}`);
+    this.channelService.getChannelsApi().then(autreresultat=> {
+      localChannels = autreresultat;
+      console.log(`localChannels[0].name vaut : ${localChannels[0].name}`);
+      console.log(`localChannels.lenght vaut : ${localChannels.length}`);
+      localNb = this.channelService.genChannelId(localChannels);
+      console.log(`antho via API dit : ${localNb}`)
     })
-    // let nb = this.channelService.genChannelId(this.channelstempApi)+10
-    // console.log(`antho via API dit : ${nb}`)
-    // window.alert(`antho via API dit : ${nb}`) 
+    
+        
+    //console.log(`antho via API dit : ${nb}`)
+    //window.alert(`antho via API dit : ${nb}`) 
   };
   
   

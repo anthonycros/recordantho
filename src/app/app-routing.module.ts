@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'channels', component: ChannelListComponent },
   { path: 'records', component: RecordListComponent },
   { path: 'channel/:id', component: ChannelDetailsComponent },
+  { path: 'channel/new', component: ChannelDetailsComponent },
   { path: 'record/:id', component: RecordDetailsComponent },
 ];
 

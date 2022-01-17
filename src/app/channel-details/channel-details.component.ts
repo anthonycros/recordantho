@@ -28,11 +28,22 @@ export class ChannelDetailsComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const channelIdFromRoute = routeParams.get('id');
 
+    console.log(`Le channelIdFromRoute vaut : ${channelIdFromRoute}`)
+    
     // Puis on cherche la chaine correspondant à cet id
-    this.channelService.getChannelsApi().then(resultat=> 
-      {
-        this.channel = resultat.find(channel => channel.id === Number(channelIdFromRoute)) ;
-      })
+    if (channelIdFromRoute == "new") {
+      console.log(`On est dans une création de channel`)  
+      this.channel.id = 19;
+      this.channel.name = "toto";
+      this.channel.url = "url";
+    }
+    else
+    {
+      this.channelService.getChannelsApi().then(resultat=> 
+        {
+          this.channel = resultat.find(channel => channel.id === Number(channelIdFromRoute)) ;
+        })
+    }
   }
 
   goBack(): void {
