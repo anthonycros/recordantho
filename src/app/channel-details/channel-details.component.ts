@@ -36,7 +36,14 @@ export class ChannelDetailsComponent implements OnInit {
     if (channelIdFromRoute == "new") {
       console.log(`On est dans une création de channel`) 
       this.context_mode = "new"; 
-      this.channel = {id: null, name: "", url: ""};
+      let localNb;
+      let localChannels: Channel[];
+      console.log(`On entre dans le calcul de l'id`);
+      this.channelService.getChannelsApi().then(resultat=> {
+        localChannels = resultat });
+      localNb = this.channelService.genChannelId(localChannels);
+    
+      this.channel = {id: localNb, name: "", url: ""};
     }
     else
     {
@@ -66,7 +73,14 @@ export class ChannelDetailsComponent implements OnInit {
          this.channelService.updateChannel(this.channel).subscribe(() => this.goBack());
        }
        else if (this.context_mode == "new") {
-        this.channelService.createChannel(this.channel).subscribe(() => this.goBack());
+          
+        
+
+
+
+
+
+         this.channelService.createChannel(this.channel).subscribe(() => this.goBack());
        }
      }
     }
