@@ -9,9 +9,11 @@ import { ChannelService } from '../channel.service';
 })
 export class ChannelListComponent implements OnInit {
 
+  //channel: Channel;
   channels = this.channelService.getChannelsApi();
   channelstemp: Channel[];
   channelstempApi: Channel[];
+
 
   constructor(private channelService: ChannelService) { }
 
@@ -20,18 +22,28 @@ export class ChannelListComponent implements OnInit {
   }
 
   delete(channel: Channel) {
-    window.alert(`Appeler la fonction delete sur la chaîne dont l'id est : ${channel.id}`);
+    console.log(`Appel de la fonction delete sur la chaîne dont l'id est : ${channel.id}`);
+    if (channel) {
+      this.channelService.deleteChannel(channel.id).subscribe()
+    }
+
   }
 
   newchannel () {
     console.log('bonjour');
-    this.channelService.getChannels().then(resultat=> {
+    this.channelService.getChannelsApi().then(resultat=> {
       this.channelstemp = resultat
     })
     let nb = this.channelService.genChannelId(this.channelstemp)
     console.log(`antho en direct dit : ${nb}`)
     window.alert(`antho en direct dit : ${nb}`) 
   };
+
+  // delete(channel: Channel): void {
+  //   channel = this.channels.filter(h => h !== channel);
+  //   this.channelService.deleteRecord(channel.id).subscribe();
+  // }
+
   test_anthoApi () {
     let localChannels: Channel[];
     let localNb: Number;
@@ -43,15 +55,8 @@ export class ChannelListComponent implements OnInit {
       localNb = this.channelService.genChannelId(localChannels);
       console.log(`antho via API dit : ${localNb}`)
     })
-    
-        
-    //console.log(`antho via API dit : ${nb}`)
-    //window.alert(`antho via API dit : ${nb}`) 
   };
   
   
-  // delete(channel: Channel): void {
-  //   this.channel = this.channels.filter(h => h !== channel);
-  //   this.channelService.deleteRecord(channel.id).subscribe();
-  // }
+  
 }

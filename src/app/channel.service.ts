@@ -16,20 +16,7 @@ export class ChannelService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-
-  getChannels():Promise <Array<Channel>> {
-    return new Promise((resolve, reject)=>
-    { 
-      this.http.get<Array<Channel>>('/assets/channels.json').subscribe(resultat=>{ resolve(resultat) });
-     });
-
-  }
-
-  // getChannelsApi(): Observable<Channel[]> {
-  //   return this.http.get<Channel[]>(this.channelUrlList)
-        
-  // }
-
+  // Récupération de la liste des chaînes
   getChannelsApi():Promise <Array<Channel>> {
     return new Promise((resolve, reject)=>
     {
@@ -37,11 +24,16 @@ export class ChannelService {
     });    
   }
 
-  //todo ajouter id ou alors ne pas le gérer ici
+  // Update d'une chaîne
   updateChannel(channel: Channel): Observable<any> {
-    return this.http.put(`${this.channelUrl}/channel/update`, channel, this.httpOptions)  
+    return this.http.put(`${this.channelUrl}/update`, channel, this.httpOptions)  
   }
 
+  // Suppression d'une chaîne
+  deleteChannel(idChannel: Number): Observable<any> {
+    return this.http.delete(`${this.channelUrl}/delete/${idChannel}`, this.httpOptions)
+  }
+  
   // genId method to ensure that a channel always has an id.
   // If the channel array is empty,
   // the method below returns the initial number (1).

@@ -61,9 +61,10 @@ export class ChannelDetailsComponent implements OnInit {
     }
   }
 
+  //Todo : corriger le goback apres update
   onSubmit() {
      this.submitted = true;
-     if (this.channel) {
+     if ((this.channel) && (this.context_mode == "update")) {
       this.channelService.updateChannel(this.channel).subscribe(() => this.goBack())
     } 
   }

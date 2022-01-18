@@ -42,7 +42,7 @@ export class RecordDetailsComponent implements OnInit {
         this.targetChannelid = this.record.idch
       })
 
-    this.channelService.getChannels().then(resultat=> 
+    this.channelService.getChannelsApi().then(resultat=> 
         { 
           this.channels = resultat 
         })
