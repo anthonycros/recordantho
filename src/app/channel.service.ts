@@ -37,8 +37,9 @@ export class ChannelService {
     });    
   }
 
+  //todo ajouter id ou alors ne pas le gérer ici
   updateChannel(channel: Channel): Observable<any> {
-    return this.http.put(`${this.channelUrl}`, channel, this.httpOptions)  
+    return this.http.put(`${this.channelUrl}/channel/update`, channel, this.httpOptions)  
   }
 
   // genId method to ensure that a channel always has an id.

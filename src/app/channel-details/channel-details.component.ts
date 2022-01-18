@@ -15,7 +15,9 @@ export class ChannelDetailsComponent implements OnInit {
   @Input() channel?: Channel;
   // channel: Channel | undefined;
 
-  submitted = false;
+  submitted: boolean = false;
+  // contexte : new ou update
+  context_mode: string = "";
   
   constructor(
     private route: ActivatedRoute,
@@ -32,7 +34,8 @@ export class ChannelDetailsComponent implements OnInit {
     
     // Puis on cherche la chaine correspondant à cet id
     if (channelIdFromRoute == "new") {
-      console.log(`On est dans une création de channel`)  
+      console.log(`On est dans une création de channel`) 
+      this.context_mode = "new"; 
       this.channel.id = 19;
       this.channel.name = "toto";
       this.channel.url = "url";
@@ -42,6 +45,7 @@ export class ChannelDetailsComponent implements OnInit {
       this.channelService.getChannelsApi().then(resultat=> 
         {
           this.channel = resultat.find(channel => channel.id === Number(channelIdFromRoute)) ;
+          this.context_mode = "update";
         })
     }
   }
@@ -50,9 +54,6 @@ export class ChannelDetailsComponent implements OnInit {
     this.location.back();
   }
 
-  // save(): void {
-  //   window.alert('Méthode Save à coder');
-  // }
 
   save(): void {
     if (this.channel) {
