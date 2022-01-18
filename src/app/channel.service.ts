@@ -24,6 +24,11 @@ export class ChannelService {
     });    
   }
 
+  // Création d'une chaîne
+  createChannel(channel: Channel): Observable<any> {
+    return this.http.post(`${this.channelUrl}/addchannel`, channel, this.httpOptions)
+  }
+  
   // Update d'une chaîne
   updateChannel(channel: Channel): Observable<any> {
     return this.http.put(`${this.channelUrl}/update`, channel, this.httpOptions)  

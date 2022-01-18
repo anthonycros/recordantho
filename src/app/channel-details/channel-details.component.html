@@ -3,15 +3,7 @@
     <h2>Détails de la chaîne {{ channel.name }}</h2>
     <form (ngSubmit)="onSubmit()" #channelForm="ngForm">
     <div class="form-group">
-      <label for="id">Id de la chaîne : </label>
-      <input type="text" class="form-control "id="id"
-            required
-            [(ngModel)]="channel.id" name="id"
-            #id="ngModel">
-      <div [hidden]="id.valid || id.pristine"
-          class="alert alert-danger">>
-        L'id est obligatoire
-      </div>
+      <label for="id">Id de la chaîne : {{ channel.id }}</label>
     </div>
     
     <div class="form-group">

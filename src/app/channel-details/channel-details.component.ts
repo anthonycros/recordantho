@@ -36,16 +36,14 @@ export class ChannelDetailsComponent implements OnInit {
     if (channelIdFromRoute == "new") {
       console.log(`On est dans une création de channel`) 
       this.context_mode = "new"; 
-      this.channel.id = 19;
-      this.channel.name = "toto";
-      this.channel.url = "url";
+      this.channel = {id: null, name: "", url: ""};
     }
     else
     {
       this.channelService.getChannelsApi().then(resultat=> 
         {
-          this.channel = resultat.find(channel => channel.id === Number(channelIdFromRoute)) ;
           this.context_mode = "update";
+          this.channel = resultat.find(channel => channel.id === Number(channelIdFromRoute)) ;
         })
     }
   }
@@ -53,7 +51,6 @@ export class ChannelDetailsComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
 
   save(): void {
     if (this.channel) {
@@ -64,8 +61,13 @@ export class ChannelDetailsComponent implements OnInit {
   //Todo : corriger le goback apres update
   onSubmit() {
      this.submitted = true;
-     if ((this.channel) && (this.context_mode == "update")) {
-      this.channelService.updateChannel(this.channel).subscribe(() => this.goBack())
-    } 
-  }
+     if (this.channel) {
+       if (this.context_mode == "update") {
+         this.channelService.updateChannel(this.channel).subscribe(() => this.goBack());
+       }
+       else if (this.context_mode == "new") {
+        this.channelService.createChannel(this.channel).subscribe(() => this.goBack());
+       }
+     }
+    }
 }
