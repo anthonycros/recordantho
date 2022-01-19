@@ -36,18 +36,22 @@ export class ChannelDetailsComponent implements OnInit {
     if (channelIdFromRoute == "new") {
       console.log(`On est dans une création de channel`) 
       this.context_mode = "new"; 
-      let localNb;
+      //test pour générer nouvel ID
       let localChannels: Channel[];
-      console.log(`On entre dans le calcul de l'id`);
-      this.channelService.getChannelsApi().then(resultat=> {
-        localChannels = resultat });
-      localNb = this.channelService.genChannelId(localChannels);
+      let localNb;
+      console.log('On entre dans le calcul du genid');
+      this.channelService.getChannels().then(autreresultat=> {
+        localChannels = autreresultat;
+        console.log(`localChannels[0].name vaut : ${localChannels[0].name}`);
+        console.log(`localChannels.lenght vaut : ${localChannels.length}`);
+        localNb = this.channelService.genChannelId(localChannels);
+        console.log(`L'id récupéré vaut : ${localNb}`)
     
-      this.channel = {id: localNb, name: "", url: ""};
-    }
+        this.channel = {id: localNb, name: "", url: ""};
+    })}
     else
     {
-      this.channelService.getChannelsApi().then(resultat=> 
+      this.channelService.getChannels().then(resultat=> 
         {
           this.context_mode = "update";
           this.channel = resultat.find(channel => channel.id === Number(channelIdFromRoute)) ;
@@ -59,12 +63,6 @@ export class ChannelDetailsComponent implements OnInit {
     this.location.back();
   }
 
-  save(): void {
-    if (this.channel) {
-      this.channelService.updateChannel(this.channel).subscribe(()=> this.goBack())
-    }
-  }
-
   //Todo : corriger le goback apres update
   onSubmit() {
      this.submitted = true;
@@ -73,13 +71,6 @@ export class ChannelDetailsComponent implements OnInit {
          this.channelService.updateChannel(this.channel).subscribe(() => this.goBack());
        }
        else if (this.context_mode == "new") {
-          
-        
-
-
-
-
-
          this.channelService.createChannel(this.channel).subscribe(() => this.goBack());
        }
      }

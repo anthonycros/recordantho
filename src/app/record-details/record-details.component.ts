@@ -42,7 +42,7 @@ export class RecordDetailsComponent implements OnInit {
         this.targetChannelid = this.record.idch
       })
 
-    this.channelService.getChannelsApi().then(resultat=> 
+    this.channelService.getChannels().then(resultat=> 
         { 
           this.channels = resultat 
         })
@@ -59,9 +59,5 @@ export class RecordDetailsComponent implements OnInit {
     const chosenChannel = this.channels.find((element: Channel)=>{return element.id==this.targetChannelid}); 
     this.record.idch = chosenChannel.id
     this.record.urlch = chosenChannel.url
-    //console.log(this.targetChannelid)
-   
-
   }
-
 }

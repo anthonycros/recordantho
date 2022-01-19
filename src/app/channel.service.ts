@@ -17,7 +17,7 @@ export class ChannelService {
   };
 
   // Récupération de la liste des chaînes
-  getChannelsApi():Promise <Array<Channel>> {
+  getChannels():Promise <Array<Channel>> {
     return new Promise((resolve, reject)=>
     {
       this.http.get<Array<Channel>>(`${this.channelUrl}/list`).subscribe(resultat=>{ resolve(resultat) });
