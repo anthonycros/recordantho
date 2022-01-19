@@ -30,6 +30,4 @@ export class ChannelListComponent implements OnInit {
     this.channelService.reloadComponent();
   };
   
-  
-  
 }
