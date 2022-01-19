@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Channel } from './channel';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,11 @@ export class ChannelService {
 
   private channelUrl = 'https://recordantho.mysites.fr:3443/channel';  // URL to web api
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -47,6 +52,14 @@ export class ChannelService {
   genChannelId(channels: Channel[]): number {
     return channels.length > 0 ? Math.max(...channels.map(channel => channel.id)) + 1 : 1;
   }
+
+  reloadComponent(){
+    let currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
+    console.log(`router.url : ${this.router.url}`)
+ }
 
   
   /**

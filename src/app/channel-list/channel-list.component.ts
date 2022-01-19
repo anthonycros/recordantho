@@ -11,19 +11,23 @@ export class ChannelListComponent implements OnInit {
 
   channels = this.channelService.getChannels();
 
-  constructor(private channelService: ChannelService) { }
+  constructor(
+    private channelService: ChannelService
+
+  ) { }
 
   ngOnInit(): void { 
   }
 
   delete(channel: Channel) {
     if (channel) {
-      this.channelService.deleteChannel(channel.id).subscribe()
+      this.channelService.deleteChannel(channel.id).subscribe(() => this.channelService.reloadComponent());
     }
   }
 
   test_anthoApi () {
     console.log('On entre dans test_anthoapi');
+    this.channelService.reloadComponent();
   };
   
   

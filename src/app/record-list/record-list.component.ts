@@ -18,7 +18,7 @@ export class RecordListComponent implements OnInit {
 
   delete(record: Record) {
     if (record) {
-      this.recordService.deleteRecord(record.id).subscribe()
+      this.recordService.deleteRecord(record.id).subscribe(() => this.recordService.reloadComponent());
     }  
   }
 }

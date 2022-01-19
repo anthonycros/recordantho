@@ -12,7 +12,6 @@ import { RecordDetailsComponent } from './record-details/record-details.componen
 import { HttpClientModule } from '@angular/common/http';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

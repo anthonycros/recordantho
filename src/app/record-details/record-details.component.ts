@@ -7,7 +7,6 @@ import { Location } from '@angular/common';
 import { RecordService } from '../record.service';
 import { ChannelService } from '../channel.service';
 
-
 @Component({
   selector: 'app-record-details',
   templateUrl: './record-details.component.html',

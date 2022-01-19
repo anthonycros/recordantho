@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Record } from './record';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,11 @@ export class RecordService {
 
   private recordUrl = 'https://recordantho.mysites.fr:3443/record';  // URL to web api
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -37,6 +42,14 @@ export class RecordService {
   deleteRecord(idRecord: Number): Observable<any> {
     return this.http.delete(`${this.recordUrl}/delete/${idRecord}`, this.httpOptions)
   }
+
+  reloadComponent(){
+    let currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
+    console.log(`router.url : ${this.router.url}`)
+ }
 
   // méthode genId pour générer un id unique et incrémental lors de la création d'un enregistrement
   // Si le tableau est vide,

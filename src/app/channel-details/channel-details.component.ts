@@ -57,6 +57,7 @@ export class ChannelDetailsComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+    this.channelService.reloadComponent();
   }
 
   //Todo : corriger le goback apres update
