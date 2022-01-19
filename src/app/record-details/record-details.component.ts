@@ -15,13 +15,13 @@ import { ChannelService } from '../channel.service';
 })
 export class RecordDetailsComponent implements OnInit {
 
-  record: Record ;
-  channel: Channel ;
+  @Input() record?: Record ;
   channels: Array<Channel> ;
   
-
-  submitted = false;
+  submitted: boolean = false;
   targetChannelid: number;
+  // contexte : new ou update
+  context_mode: string = "";
 
   constructor(
     private route: ActivatedRoute, 
@@ -35,29 +35,68 @@ export class RecordDetailsComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const recordIdFromRoute = routeParams.get('id');
 
-    // Puis on cherche la chaine correspondant à cet id
-    this.recordService.getRecords().then(resultat=> 
-      { 
-        this.record = resultat.find(record => record.id === Number(recordIdFromRoute)) 
-        this.targetChannelid = this.record.idch
-      })
-
+    // On charge les chaînes pour alimenter la combo des chaines
     this.channelService.getChannels().then(resultat=> 
+      { 
+        this.channels = resultat 
+      })
+    
+    // Puis on cherche la chaine correspondant à cet id
+    if (recordIdFromRoute == "new") {
+      // On est dans le contexte de création d'un enregistrement
+      this.context_mode = "new";
+      //test pour générer nouvel ID
+      let localRecords: Record[];
+      let localNb;
+      //console.log('On entre dans le calcul du genid pour new record');
+      this.recordService.getRecords().then(resultat => {
+        localRecords = resultat;
+        localNb = this.recordService.genRecordId(localRecords);
+        //console.log(`L'id récupéré vaut : ${localNb}`);
+        this.record = {id: localNb, name: "", idch: null, namech: "", urlch: "", recbegin: "", recend: "", done: false, archived: false};
+      })
+    }
+    else
+    {
+      // On est dans le contexte d'affichage / modification d'un enregistrement existant
+      this.recordService.getRecords().then(resultat=> 
         { 
-          this.channels = resultat 
+          this.context_mode = "update";
+          this.record = resultat.find(record => record.id === Number(recordIdFromRoute)) 
+          this.targetChannelid = this.record.idch
+          this.onChangeChannel();
         })
-  
+    }  
   }
 
   goBack(): void {
     this.location.back();
   }
 
-  onSubmit() { this.submitted = true; }
+  //Todo : corriger le goback apres update
+  onSubmit() {
+     this.submitted = true; 
+     if (this.record) {
+       if (this.context_mode == "update") {
+         // On est dans le contexte d'affichage / modification d'un enregistrement existant
+         console.log(`mode update enreg`);
+         this.recordService.updateRecord(this.record).subscribe(() => this.goBack());
+       }
+       else if (this.context_mode == "new") {
+         // On est dans le contexte de création d'un enregistrement
+         console.log(`mode new enreg`);
+         this.recordService.createRecord(this.record).subscribe(() => this.goBack);
+       }
+       else {
+        console.log(`mode autre enreg`);
+       }
+     }
+  }
 
   onChangeChannel() {
     const chosenChannel = this.channels.find((element: Channel)=>{return element.id==this.targetChannelid}); 
     this.record.idch = chosenChannel.id
+    this.record.namech = chosenChannel.name
     this.record.urlch = chosenChannel.url
   }
 }

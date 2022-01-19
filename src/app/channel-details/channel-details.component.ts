@@ -13,7 +13,6 @@ import { ChannelService } from '../channel.service';
 export class ChannelDetailsComponent implements OnInit {
 
   @Input() channel?: Channel;
-  // channel: Channel | undefined;
 
   submitted: boolean = false;
   // contexte : new ou update
@@ -29,28 +28,25 @@ export class ChannelDetailsComponent implements OnInit {
     // D'abord on récupère l'id de la chaine depuis la route courante
     const routeParams = this.route.snapshot.paramMap;
     const channelIdFromRoute = routeParams.get('id');
-
-    console.log(`Le channelIdFromRoute vaut : ${channelIdFromRoute}`)
     
     // Puis on cherche la chaine correspondant à cet id
     if (channelIdFromRoute == "new") {
-      console.log(`On est dans une création de channel`) 
+      // On est dans le contexte de création d'une chaîne
       this.context_mode = "new"; 
       //test pour générer nouvel ID
       let localChannels: Channel[];
       let localNb;
-      console.log('On entre dans le calcul du genid');
-      this.channelService.getChannels().then(autreresultat=> {
-        localChannels = autreresultat;
-        console.log(`localChannels[0].name vaut : ${localChannels[0].name}`);
-        console.log(`localChannels.lenght vaut : ${localChannels.length}`);
+      //console.log('On entre dans le calcul du genid pour new channel');
+      this.channelService.getChannels().then(resultat=> {
+        localChannels = resultat;
         localNb = this.channelService.genChannelId(localChannels);
-        console.log(`L'id récupéré vaut : ${localNb}`)
-    
+        //console.log(`L'id récupéré vaut : ${localNb}`)    
         this.channel = {id: localNb, name: "", url: ""};
-    })}
+    })
+    }
     else
     {
+      // On est dans le contexte d'affichage / modification d'une chaîne existante
       this.channelService.getChannels().then(resultat=> 
         {
           this.context_mode = "update";
@@ -68,9 +64,11 @@ export class ChannelDetailsComponent implements OnInit {
      this.submitted = true;
      if (this.channel) {
        if (this.context_mode == "update") {
+         // On est dans le contexte d'affichage / modification d'une chaîne existante
          this.channelService.updateChannel(this.channel).subscribe(() => this.goBack());
        }
        else if (this.context_mode == "new") {
+         // On est dans le contexte de création d'une chaîne
          this.channelService.createChannel(this.channel).subscribe(() => this.goBack());
        }
      }

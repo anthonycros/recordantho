@@ -7,12 +7,13 @@ import { RecordDetailsComponent } from './record-details/record-details.componen
 
 const routes: Routes = [
   //Route par défaut
-  { path: '', redirectTo: '/channels', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'channels', component: ChannelListComponent },
-  { path: 'records', component: RecordListComponent },
   { path: 'channel/:id', component: ChannelDetailsComponent },
   { path: 'channel/new', component: ChannelDetailsComponent },
+  { path: 'records', component: RecordListComponent },
   { path: 'record/:id', component: RecordDetailsComponent },
+  { path: 'record/:new', component: RecordDetailsComponent },
 ];
 
 @NgModule({

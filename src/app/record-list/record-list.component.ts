@@ -17,7 +17,8 @@ export class RecordListComponent implements OnInit {
   }
 
   delete(record: Record) {
-    window.alert(`Appeler la fonction delete sur l'enregistrement dont l'id est : ${record.id}`);  
+    if (record) {
+      this.recordService.deleteRecord(record.id).subscribe()
+    }  
   }
-
 }

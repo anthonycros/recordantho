@@ -39,11 +39,11 @@ export class ChannelService {
     return this.http.delete(`${this.channelUrl}/delete/${idChannel}`, this.httpOptions)
   }
   
-  // genId method to ensure that a channel always has an id.
-  // If the channel array is empty,
-  // the method below returns the initial number (1).
-  // if the channel array is not empty, the method below returns the highest
-  // channel id + 1.
+  // méthode genId pour générer un id unique et incrémental lors de la création d'une chaîne
+  // Si le tableau est vide,
+  // la méthode génère (1).
+  // Si le tableau n'est pas vide, la méthode génère l'idmax trouvé + 1
+
   genChannelId(channels: Channel[]): number {
     return channels.length > 0 ? Math.max(...channels.map(channel => channel.id)) + 1 : 1;
   }
