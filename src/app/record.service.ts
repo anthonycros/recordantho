@@ -17,7 +17,7 @@ export class RecordService {
   ) { }
   
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'text' })
   };
 
   // Récupération de la liste des enregistrements
@@ -35,12 +35,12 @@ export class RecordService {
 
   // Update d'un enregistrement
   updateRecord(record: Record): Observable<any> {
-    return this.http.put(`${this.recordUrl}/update`, record, this.httpOptions)  
+    return this.http.put(`${this.recordUrl}/update`, record, {'responseType': 'text'})  
   }
   
   // Suppression d'une chaîne
   deleteRecord(idRecord: Number): Observable<any> {
-    return this.http.delete(`${this.recordUrl}/delete/${idRecord}`, this.httpOptions)
+    return this.http.delete(`${this.recordUrl}/delete/${idRecord}`, {'responseType': 'text'})
   }
 
   reloadComponent(){
@@ -48,7 +48,13 @@ export class RecordService {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate([currentUrl]);
-    console.log(`router.url : ${this.router.url}`)
+    // console.log(`On est dans recordservice reloadcomponent() => ok`);
+    // window.alert("attention ça va reloader");
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 100);
+    // window.alert("reload terminé");
+    // console.log(`router.url : ${this.router.url}`);
  }
 
   // méthode genId pour générer un id unique et incrémental lors de la création d'un enregistrement

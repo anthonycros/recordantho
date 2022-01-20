@@ -20,6 +20,7 @@ export class ChannelListComponent implements OnInit {
   }
 
   delete(channel: Channel) {
+    //console.log(`On est dans la méthode delete de channel-list => ok`);
     if (channel) {
       this.channelService.deleteChannel(channel.id).subscribe(() => this.channelService.reloadComponent());
     }

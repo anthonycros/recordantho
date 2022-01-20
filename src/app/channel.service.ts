@@ -18,7 +18,7 @@ export class ChannelService {
   ) { }
   
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'responseType': 'text' })
   };
 
   // Récupération de la liste des chaînes
@@ -36,12 +36,14 @@ export class ChannelService {
   
   // Update d'une chaîne
   updateChannel(channel: Channel): Observable<any> {
-    return this.http.put(`${this.channelUrl}/update`, channel, this.httpOptions)  
+    //console.log(`On est dans la méthode updateChannel de channelService => ok`);
+    return this.http.put(`${this.channelUrl}/update`, channel, {'responseType': 'text'});  
   }
 
   // Suppression d'une chaîne
   deleteChannel(idChannel: Number): Observable<any> {
-    return this.http.delete(`${this.channelUrl}/delete/${idChannel}`, this.httpOptions)
+    //console.log(`On est dans la méthode deleteChannel de channelService => ok`);
+    return this.http.delete(`${this.channelUrl}/delete/${idChannel}`, {'responseType': 'text'});
   }
   
   // méthode genId pour générer un id unique et incrémental lors de la création d'une chaîne
@@ -54,11 +56,19 @@ export class ChannelService {
   }
 
   reloadComponent(){
+    // console.log(`On est dans chanelservice reloadcomponent() => ok`);
+    // window.alert("attention ça va reloader");
     let currentUrl = this.router.url;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate([currentUrl]);
-    console.log(`router.url : ${this.router.url}`)
+    
+    
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 100);
+    // window.alert("reload terminé");
+    // console.log(`router.url : ${this.router.url}`);
  }
 
   

@@ -69,7 +69,9 @@ export class RecordDetailsComponent implements OnInit {
   }
 
   goBack(): void {
+    //console.log(`On est dans record-details-compo goback() => ok`);
     this.location.back();
+    this.recordService.reloadComponent();
   }
 
   //Todo : corriger le goback apres update
@@ -78,13 +80,13 @@ export class RecordDetailsComponent implements OnInit {
      if (this.record) {
        if (this.context_mode == "update") {
          // On est dans le contexte d'affichage / modification d'un enregistrement existant
-         console.log(`mode update enreg`);
+         //console.log(`mode update enreg`);
          this.recordService.updateRecord(this.record).subscribe(() => this.goBack());
        }
        else if (this.context_mode == "new") {
          // On est dans le contexte de création d'un enregistrement
-         console.log(`mode new enreg`);
-         this.recordService.createRecord(this.record).subscribe(() => this.goBack);
+         //console.log(`On est en mode new record => ok`);
+         this.recordService.createRecord(this.record).subscribe(() => this.goBack());
        }
        else {
         console.log(`mode autre enreg`);

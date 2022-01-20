@@ -56,6 +56,7 @@ export class ChannelDetailsComponent implements OnInit {
   }
 
   goBack(): void {
+    //console.log(`On est dans chanel-details-compo goback() => ok`);
     this.location.back();
     this.channelService.reloadComponent();
   }
@@ -66,10 +67,12 @@ export class ChannelDetailsComponent implements OnInit {
      if (this.channel) {
        if (this.context_mode == "update") {
          // On est dans le contexte d'affichage / modification d'une chaîne existante
+         //console.log(`On est en mode update channel => ok`);
          this.channelService.updateChannel(this.channel).subscribe(() => this.goBack());
        }
        else if (this.context_mode == "new") {
          // On est dans le contexte de création d'une chaîne
+         //console.log(`On est en mode new channel => ok`);
          this.channelService.createChannel(this.channel).subscribe(() => this.goBack());
        }
      }
