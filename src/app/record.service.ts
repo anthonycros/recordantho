@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class RecordService {
 
-  private recordUrl = 'https://recordantho.mysites.fr:3443/record';  // URL to web api
+  // Passage en docker avec API locale
+  //private recordUrl = 'https://recordantho.mysites.fr:3443/record';  // URL to web api
+  private recordUrl = 'http://record-api:3000/record';
 
   constructor(
     private http: HttpClient,

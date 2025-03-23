@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class ChannelService {
 
-  private channelUrl = 'https://recordantho.anthoetmapie.fr:3443/channel';  // URL to web api
+  // Passage en docker avec API locale
+  //private channelUrl = 'https://recordantho.anthoetmapie.fr:3443/channel';  // URL to web api
+  private channelUrl = 'http://record-api:3000/channel';
 
   constructor(
     private http: HttpClient,
